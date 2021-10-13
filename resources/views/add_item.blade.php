@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h2>ADD ITEM</h2>
+        <h2>ADD NEW ITEM</h2>
         <form action="{{ route('additem') }}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">

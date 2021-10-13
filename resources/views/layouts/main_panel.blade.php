@@ -23,14 +23,24 @@
             <div class="col-sm-2">
                 <ul class="list-unstyled">
                     <li>
-                        <button class="btn btn-dark">
+                        <a class="btn btn-dark btn-block" href="/items">
                             ITEMS
-                        </button>
+                        </a>
                     </li>
                     <li class="mt-2">
-                        <button class="btn btn-dark">
+                        <a class="btn btn-dark btn-block" href="/additem">
                             ADD ITEMS
-                        </button>
+                        </a>
+                    </li>
+                    <li class="mt-2">
+                        <a class="btn btn-dark btn-block" href="/customers">
+                            CUSTOMERS
+                        </a>
+                    </li>
+                    <li class="mt-2">
+                        <a class="btn btn-dark btn-block" href="/addcustomer">
+                            ADD CUSTOMERS
+                        </a>
                     </li>
                 </ul>
             </div>

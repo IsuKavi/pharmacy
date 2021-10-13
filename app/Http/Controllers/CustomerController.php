@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use Carbon\Carbon;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,29 +35,24 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-
-        $date = Carbon::today()->addWeeks(2)->toDateString();
-
         //VALIDATION
         $this->validate($request, [
-            'batchNo' => 'required',
             'name' => 'required',
-            'qty' => 'required|integer|gt:0',
-            'unitPrice' => 'required|numeric|gt:0',
-            'exp' => 'required|date|after_or_equal:' . $date
+            'age' => 'required|integer|gt:0',
+            'gender' => 'required',
+            'contact' => 'nullable|regex:/^((?:(0))[0-9]{9})$/',
         ]);
 
         //CREATE ITEM
-        $item = new Item;
-        $item->batchNo = $request->input('batchNo');
-        $item->name = $request->input('name');
-        $item->qty = $request->input('qty');
-        $item->unitPrice = $request->input('unitPrice');
-        $item->exp = $request->input('exp');
-        $item->status = 1;
-        $item->save();
+        $customer = new Customer;
+        $customer->name = $request->input('name');
+        $customer->age = $request->input('age');
+        $customer->gender = $request->input('gender');
+        $customer->contact = $request->input('contact');
+        $customer->status = 1;
+        $customer->save();
 
-        return redirect('/')->with('success', 'Item Added');
+        return redirect('/')->with('success', 'Customer Added');
     }
 
     /**
@@ -92,29 +86,7 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $date = Carbon::today()->addWeeks(2)->toDateString();
-
-        //VALIDATION
-        $this->validate($request, [
-            'batchNo' => 'required',
-            'name' => 'required',
-            'qty' => 'required|integer|gt:0',
-            'unitPrice' => 'required|numeric|gt:0',
-            'exp' => 'required|date|after_or_equal:' . $date
-        ]);
-
-        // UPDATE ITEM
-        $item = Item::findOrFail($id);
-        $item->batchNo = $request->input('batchNo');
-        $item->name = $request->input('name');
-        $item->qty = $request->input('qty');
-        $item->unitPrice = $request->input('unitPrice');
-        $item->exp = $request->input('exp');
-        $item->status = 1;
-        $item->save();
-
-        return redirect('/items');
+        //
     }
 
     /**
