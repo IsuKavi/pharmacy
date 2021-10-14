@@ -49,7 +49,6 @@ class CustomerController extends Controller
         $customer->age = $request->input('age');
         $customer->gender = $request->input('gender');
         $customer->contact = $request->input('contact');
-        $customer->status = 1;
         $customer->save();
 
         return redirect('/')->with('success', 'Customer Added');
@@ -86,7 +85,23 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //VALIDATION
+        $this->validate($request, [
+            'name' => 'required',
+            'age' => 'required|integer|gt:0',
+            'gender' => 'required',
+            'contact' => 'nullable|regex:/^((?:(0))[0-9]{9})$/',
+        ]);
+
+        // UPDATE CUSTOMER
+        $customer = Customer::findOrFail($id);
+        $customer->name = $request->input('name');
+        $customer->age = $request->input('age');
+        $customer->gender = $request->input('gender');
+        $customer->contact = $request->input('contact');
+        $customer->save();
+
+        return redirect('/customers');
     }
 
     /**
@@ -97,6 +112,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
+
+        return redirect('/customers')->with('success', 'Customer Deleted');
     }
 }

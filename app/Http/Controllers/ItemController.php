@@ -55,7 +55,6 @@ class ItemController extends Controller
         $item->qty = $request->input('qty');
         $item->unitPrice = $request->input('unitPrice');
         $item->exp = $request->input('exp');
-        $item->status = 1;
         $item->save();
 
         return redirect('/')->with('success', 'Item Added');
@@ -111,7 +110,6 @@ class ItemController extends Controller
         $item->qty = $request->input('qty');
         $item->unitPrice = $request->input('unitPrice');
         $item->exp = $request->input('exp');
-        $item->status = 1;
         $item->save();
 
         return redirect('/items');
@@ -125,6 +123,9 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->delete();
+
+        return redirect('/items')->with('success', 'Item Deleted');
     }
 }
