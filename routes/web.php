@@ -36,7 +36,6 @@ Route::get('/addcustomer', function () {
 
 Route::get('/updateitem/{id}', function ($id) {
     $item = Item::where('id', $id)
-        ->where('status', 1)
         ->first();
     if ($item) {
         return view('update_item', ['item' => $item]);
@@ -45,7 +44,6 @@ Route::get('/updateitem/{id}', function ($id) {
 
 Route::get('/updatecustomer/{id}', function ($id) {
     $customer = Customer::where('id', $id)
-        ->where('status', 1)
         ->first();
     if ($customer) {
         return view('update_customer', ['customer' => $customer]);

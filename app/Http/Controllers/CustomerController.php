@@ -49,6 +49,7 @@ class CustomerController extends Controller
         $customer->age = $request->input('age');
         $customer->gender = $request->input('gender');
         $customer->contact = $request->input('contact');
+        $customer->address = $request->input('address');
         $customer->save();
 
         return redirect('/')->with('success', 'Customer Added');
@@ -99,6 +100,7 @@ class CustomerController extends Controller
         $customer->age = $request->input('age');
         $customer->gender = $request->input('gender');
         $customer->contact = $request->input('contact');
+        $customer->address = $request->input('address');
         $customer->save();
 
         return redirect('/customers');
